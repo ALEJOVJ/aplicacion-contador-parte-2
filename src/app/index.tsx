@@ -1,11 +1,11 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 export default function App() {
@@ -41,6 +41,11 @@ export default function App() {
     }
   };
 
+  const reiniciarContador = () => {
+    setContador(0);
+    setRegistros([]);
+  };
+
   return (
     <View style={styles.contenedor}>
       <View style={styles.tarjeta}>
@@ -65,6 +70,13 @@ export default function App() {
             onPress={restarContador}
           >
             <Text style={styles.textoBoton}>- Restar Like</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.botonReiniciar}
+            onPress={reiniciarContador}
+          >
+            <Text style={styles.textoBoton}>Reiniciar contador</Text>
           </TouchableOpacity>
         </View>
 
@@ -131,6 +143,12 @@ const styles = StyleSheet.create({
   },
   botonRestar: {
     backgroundColor: '#e67e22',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  botonReiniciar: {
+    backgroundColor: '#c0392b',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
