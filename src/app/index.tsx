@@ -1,12 +1,16 @@
 
-import React from 'react';
+import { useState } from 'react';
 import {
-  View,
+  StyleSheet,
   Text,
-  StyleSheet
+  View
 } from 'react-native';
 
 export default function App() {
+
+  // Estado inicial del contador
+  const [contador, setContador] = useState(0);
+
   return (
     <View style={estilos.contenedor}>
 
@@ -21,13 +25,11 @@ export default function App() {
           el contador y registrar la hora exacta.
         </Text>
 
-        {/* Contador visual */}
+        {/* Contador dinámico */}
 
         <Text style={estilos.contador}>
-          0
+          {contador}
         </Text>
-
-        {/* Espacio para los botones */}
 
         <View style={estilos.areaBotones}>
           <Text style={estilos.textoInformativo}>
@@ -92,5 +94,6 @@ const estilos = StyleSheet.create({
   },
 
 });
+
 
 
