@@ -46,6 +46,9 @@ export default function App() {
     setRegistros([]);
   };
 
+  // Cambiar el color cuando el contador supere los 10 Likes
+  const colorContador = contador > 10 ? '#e74c3c' : '#3498db';
+
   return (
     <View style={styles.contenedor}>
       <View style={styles.tarjeta}>
@@ -55,7 +58,15 @@ export default function App() {
           Presiona los botones para modificar el contador.
         </Text>
 
-        <Text style={styles.contador}>{contador}</Text>
+        <Text style={[styles.contador, { color: colorContador }]}>
+          {contador}
+        </Text>
+
+        {contador > 10 && (
+          <Text style={styles.mensaje}>
+            ¡Has superado los 10 Likes!
+          </Text>
+        )}
 
         <View style={styles.filaBotones}>
           <TouchableOpacity
@@ -128,8 +139,13 @@ const styles = StyleSheet.create({
   contador: {
     fontSize: 55,
     fontWeight: 'bold',
-    color: '#3498db',
     marginVertical: 15,
+  },
+  mensaje: {
+    color: '#e74c3c',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 15,
   },
   filaBotones: {
     width: '100%',
