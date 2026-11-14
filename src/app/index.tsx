@@ -1,15 +1,20 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
-  StyleSheet,
+  View,
   Text,
-  View
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 export default function App() {
 
-  // Estado inicial del contador
   const [contador, setContador] = useState(0);
+
+  // Función para aumentar el contador
+  const incrementarContador = () => {
+    setContador(contador + 1);
+  };
 
   return (
     <View style={estilos.contenedor}>
@@ -25,11 +30,20 @@ export default function App() {
           el contador y registrar la hora exacta.
         </Text>
 
-        {/* Contador dinámico */}
-
+        {/* Contador */}
         <Text style={estilos.contador}>
           {contador}
         </Text>
+
+        {/* Botón de Likes */}
+        <TouchableOpacity
+          style={estilos.botonLike}
+          onPress={incrementarContador}
+        >
+          <Text style={estilos.textoBoton}>
+            ¡Haz Clic Aquí!
+          </Text>
+        </TouchableOpacity>
 
         <View style={estilos.areaBotones}>
           <Text style={estilos.textoInformativo}>
@@ -82,6 +96,20 @@ const estilos = StyleSheet.create({
     marginVertical: 15,
   },
 
+  botonLike: {
+    backgroundColor: '#2ecc71',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+
+  textoBoton: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
   areaBotones: {
     alignItems: 'center',
     marginTop: 10,
@@ -94,6 +122,7 @@ const estilos = StyleSheet.create({
   },
 
 });
+  
 
 
 
