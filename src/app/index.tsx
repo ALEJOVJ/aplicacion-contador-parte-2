@@ -11,9 +11,37 @@ export default function App() {
 
   const [contador, setContador] = useState(0);
 
-  // Función para aumentar el contador
+  // Estado para guardar los registros de los clics
+  const [registros, setRegistros] = useState<
+    { numero: number; hora: string }[]
+  >([]);
+
+  // Función para aumentar el contador y registrar la hora
   const incrementarContador = () => {
-    setContador(contador + 1);
+
+    const nuevoContador = contador + 1;
+
+    setContador(nuevoContador);
+
+    // Obtener la hora exacta del dispositivo
+    const fecha = new Date();
+
+    const hora = [
+      fecha.getHours(),
+      fecha.getMinutes(),
+      fecha.getSeconds()
+    ]
+      .map(valor => String(valor).padStart(2, '0'))
+      .join(':');
+
+    // Crear el registro del clic
+    const nuevoRegistro = {
+      numero: nuevoContador,
+      hora: hora
+    };
+
+    // Guardar el registro
+    setRegistros(prev => [nuevoRegistro, ...prev]);
   };
 
   return (
@@ -47,7 +75,7 @@ export default function App() {
 
         <View style={estilos.areaBotones}>
           <Text style={estilos.textoInformativo}>
-            Contador de Likes
+            Total de registros: {registros.length}
           </Text>
         </View>
 
@@ -122,7 +150,8 @@ const estilos = StyleSheet.create({
   },
 
 });
-  
+
+
 
 
 
