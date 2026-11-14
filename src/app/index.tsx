@@ -1,17 +1,18 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-  View,
-  Text,
+  ScrollView,
   StyleSheet,
-  TouchableOpacity
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 export default function App() {
 
   const [contador, setContador] = useState(0);
 
-  // Estado para guardar los registros de los clics
+  // Estado para guardar los registros
   const [registros, setRegistros] = useState<
     { numero: number; hora: string }[]
   >([]);
@@ -23,7 +24,7 @@ export default function App() {
 
     setContador(nuevoContador);
 
-    // Obtener la hora exacta del dispositivo
+    // Obtener la hora del dispositivo
     const fecha = new Date();
 
     const hora = [
@@ -34,13 +35,13 @@ export default function App() {
       .map(valor => String(valor).padStart(2, '0'))
       .join(':');
 
-    // Crear el registro del clic
+    // Crear nuevo registro
     const nuevoRegistro = {
       numero: nuevoContador,
       hora: hora
     };
 
-    // Guardar el registro
+    // Guardar el registro al inicio de la lista
     setRegistros(prev => [nuevoRegistro, ...prev]);
   };
 
@@ -73,11 +74,46 @@ export default function App() {
           </Text>
         </TouchableOpacity>
 
-        <View style={estilos.areaBotones}>
-          <Text style={estilos.textoInformativo}>
-            Total de registros: {registros.length}
-          </Text>
+        {/* Tabla de registros */}
+        <View style={estilos.tabla}>
+
+          {/* Encabezados */}
+          <View style={estilos.encabezado}>
+            <Text style={estilos.columna}>
+              N.º Clic
+            </Text>
+
+            <Text style={estilos.columna}>
+              Hora
+            </Text>
+          </View>
+
+          {/* Contenido de la tabla */}
+          <ScrollView style={estilos.cuerpoTabla}>
+
+            {registros.map((item, index) => (
+
+              <View key={index} style={estilos.fila}>
+
+                <Text style={estilos.celda}>
+                  {item.numero}
+                </Text>
+
+                <Text style={estilos.celda}>
+                  {item.hora}
+                </Text>
+
+              </View>
+
+            ))}
+
+          </ScrollView>
+
         </View>
+
+        <Text style={estilos.textoInformativo}>
+          Total de registros: {registros.length}
+        </Text>
 
       </View>
 
@@ -129,7 +165,7 @@ const estilos = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 20,
   },
 
   textoBoton: {
@@ -138,15 +174,48 @@ const estilos = StyleSheet.create({
     fontSize: 16,
   },
 
-  areaBotones: {
-    alignItems: 'center',
-    marginTop: 10,
+  tabla: {
+    borderWidth: 1,
+    borderColor: '#dddddd',
+    borderRadius: 6,
+    overflow: 'hidden',
+  },
+
+  encabezado: {
+    flexDirection: 'row',
+    backgroundColor: '#f5f6f7',
+    padding: 12,
+  },
+
+  columna: {
+    flex: 1,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#555555',
+  },
+
+  cuerpoTabla: {
+    maxHeight: 200,
+  },
+
+  fila: {
+    flexDirection: 'row',
+    padding: 12,
+    borderTopWidth: 1,
+    borderColor: '#eeeeee',
+  },
+
+  celda: {
+    flex: 1,
+    textAlign: 'center',
+    color: '#333333',
   },
 
   textoInformativo: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#555555',
-    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: 15,
   },
 
 });
