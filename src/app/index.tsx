@@ -17,9 +17,23 @@ export default function App() {
         </Text>
 
         <Text style={estilos.descripcion}>
-          Aplicación móvil para contar Likes
-          y registrar la hora de cada clic.
+          Haz clic en el botón para incrementar
+          el contador y registrar la hora exacta.
         </Text>
+
+        {/* Contador visual */}
+
+        <Text style={estilos.contador}>
+          0
+        </Text>
+
+        {/* Espacio para los botones */}
+
+        <View style={estilos.areaBotones}>
+          <Text style={estilos.textoInformativo}>
+            Contador de Likes
+          </Text>
+        </View>
 
       </View>
 
@@ -48,14 +62,35 @@ const estilos = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#34495e',
+    marginBottom: 12,
   },
 
   descripcion: {
     fontSize: 14,
     textAlign: 'center',
     color: '#666666',
-    marginTop: 12,
+    marginBottom: 20,
+  },
+
+  contador: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: '#3498db',
+    textAlign: 'center',
+    marginVertical: 15,
+  },
+
+  areaBotones: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  textoInformativo: {
+    fontSize: 15,
+    color: '#555555',
+    fontWeight: '600',
   },
 
 });
+
 
